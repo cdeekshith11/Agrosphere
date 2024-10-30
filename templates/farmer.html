@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/table.css')}}">
+    <title>Farmers</title>
+</head>
+<body>
+    <h3>View All Farmer's Details</h3>
+    <!-- display all farmer in table from app.py -->
+    <table class="cssdoodler-table">
+        <tr>
+            <th>Farmer ID</th>
+            <th>Farmer Name</th>
+            <th>Farmer Contact Details</th>
+            <th>Farmer Land Size</th>
+            <th>Farmer Crop Performance</th>
+        </tr>
+        {% for farmer in farmers %}
+        <tr>
+            <td>{{ farmer.id }}</td>
+            <td>{{ farmer.name }}</td>
+            <td>{{ farmer.email }}</td>
+            <td>{{ farmer.land_size }}</td>
+            <td>{{ farmer.crop_performance }}</td>
+            <td><a href="/farmer/{{farmer.id}}" class="btn btn-info">View</a></td>
+            <td><form id="deleteFarmerForm" method="POST" action="/farmer/delete/{{farmer.id}}" >
+                <!-- <input type="hidden" id="farmer_id" name="farmer_id" value="{{farmer.id}}"> -->
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form></td>
+            <td><a href="/farmer/edit/{{farmer.id}}" class="btn btn-warning">Edit</a></td>
+            
+        </tr>
+        {% endfor %}
+    </table>
+
+    <!-- <a class="link" href="/farmer/edit-farmer">Click here for Editing Farmer Details</a> -->
+    <script>
+        // document.getElementById('deleteFarmerForm').addEventListener('submit', function(e) {
+        //     e.preventDefault();
+        //     var farmerId = document.getElementById('farmer_id').value;
+        //     this.action = "/farmer/delete/" + farmerId;
+        //     this.submit();
+        // });
+    </script>
+</body>
+</html>
